@@ -5,6 +5,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root, {action as rootAction, loader as rootLoader} from "./routes/root";
 import ErrorPage from "./Error-page";
 import Contact, {loader as contactLoader} from "./routes/contact";
+import EditContact, {action as editAction} from "./routes/edit";
 
 // React router позволяет менять и отрисовывать эл-ты интерфейса на одной странице,
 // без запросов на сервер и обновлений страницы; и с возможностью вкладывать одни эл-ты в другие
@@ -21,6 +22,12 @@ const router = createBrowserRouter([
                 path: '/react-router-6/contacts/:contactId',
                 element: <Contact />,
                 loader: contactLoader,
+            },
+            {
+                path: '/react-router-6/contacts/:contactId/edit',
+                element: <EditContact />,
+                loader: contactLoader,                     // Позаимствовали contactLoader, но обычно делают индивидуальную функцию-лоадер для роута
+                action: editAction,
             }
         ]
     },

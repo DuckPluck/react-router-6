@@ -2,13 +2,11 @@ import {Form, Params, useLoaderData} from "react-router-dom";
 import {getContact, IContact} from "../contacts";
 import {FC} from "react";
 
-interface ContactLoaderParams {
-    params: {
-        contactId: string;
-    }
+type ContactLoaderParams = {
+    contactId: string;
 }
 
-export async function loader({ params } : ContactLoaderParams): Promise<{contact: IContact}> {   // TODO: какая-то херня с типом аргумента (any работает)
+export async function loader({ params } : any): Promise<{contact: IContact}> {   // TODO: какая-то херня с типом аргумента (any работает)
     const contact = await getContact(params.contactId) as IContact
     return { contact }                                              // async функция для получения данных по параметру contactId (идет в роут)
 }                                                                   // `params` - те динамические данные, которые мы указываем в ссылке через `:`

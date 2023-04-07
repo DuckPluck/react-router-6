@@ -12,7 +12,7 @@ export async function action() {                                             // 
     return { contact }
 }
 
-interface Contacts {
+export interface Contacts {
     contacts: IContact[];
 }
 
@@ -42,9 +42,10 @@ const Root: FC = () => {
                             aria-live="polite"
                         ></div>
                     </form>
-                    <Form method="post">                      {/* Для отправки введенной информации не на сервер, а в роут, необходимо изменить <form> на <Form> */}
-                        <button type="submit">New</button>    {/* и задать в роуте action. Теперь submit будет работать не с html, а с роутером */}
-                    </Form>                                   {/* Когда тыкается submit, запрос уходит в роут и обновляет все `useLoaderData` */}
+                    <Form method="post">                      {/* Для создания, редактирования и удаления данных в роуте используется тег <Form method="post"> */}
+                        <button type="submit">New</button>    {/* Для отправки введенной информации не на сервер, а в роут, необходимо изменить <form> на <Form> */}
+                    </Form>                                   {/* и задать в роуте action. Теперь submit будет работать не с html, а с роутером */}
+                                                              {/* Когда тыкается submit, запрос уходит в роут и обновляет все `useLoaderData` */}
 
                 </div>                                        {/* Для смены отрисовки на текущей странице, а не для перехода на другую (и, следственно, перезагрузки всех данных страницы) */}
                 <nav>                                         {/* вместо тега <a> используется <Link> (вместо `href` используется `to`) */}

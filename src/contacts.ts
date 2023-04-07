@@ -39,27 +39,27 @@ export async function getContact(id: string) {
     let contact = contacts.find((contact: IContact) => contact.id === id);
     return contact ?? null;
 }
-//
-// export async function updateContact(id, updates) {
-//     await fakeNetwork();
-//     let contacts = await localforage.getItem("contacts") as IContact[];
-//     let contact = contacts.find((contact: IContact) => contact.id === id);
-//     if (!contact) throw new Error("No contact found for", id);
-//     Object.assign(contact, updates);
-//     await set(contacts);
-//     return contact;
-// }
-//
-// export async function deleteContact(id) {
-//     let contacts = await localforage.getItem("contacts") as IContact[];
-//     let index = contacts.findIndex(contact => contact.id === id);
-//     if (index > -1) {
-//         contacts.splice(index, 1);
-//         await set(contacts);
-//         return true;
-//     }
-//     return false;
-// }
+
+export async function updateContact(id: string, updates: IContact) {
+    await fakeNetwork();
+    let contacts = await localforage.getItem("contacts") as IContact[];
+    let contact = contacts.find((contact: IContact) => contact.id === id);
+    if (!contact) throw new Error(`No contact found for ${id}`);
+    Object.assign(contact, updates);
+    await set(contacts);
+    return contact;
+}
+
+export async function deleteContact(id: string) {
+    let contacts = await localforage.getItem("contacts") as IContact[];
+    let index = contacts.findIndex(contact => contact.id === id);
+    if (index > -1) {
+        contacts.splice(index, 1);
+        await set(contacts);
+        return true;
+    }
+    return false;
+}
 
 function set(contacts: IContact[]) {
     return localforage.setItem("contacts", contacts);
